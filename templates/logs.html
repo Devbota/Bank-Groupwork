@@ -1,0 +1,114 @@
+{% extends "base.html" %}
+
+{% block title %}Logs{% endblock %}
+
+{% block css %}
+<style>
+    select {
+        display: block;
+        margin: 20px auto; /* Adjusted margin */
+        width: 200px;
+        padding: 10px;
+        font-family: Arial, sans-serif;
+        font-size: 16px; /* Increased font size */
+        color: #333;
+        background-color: #fff;
+        border: 1px solid #ccc;
+        border-radius: 5px; /* Increased border-radius */
+    }
+    .button {
+        display: block;
+        margin: 20px auto; /* Adjusted margin */
+        width: 200px;
+        padding: 10px 20px;
+        font-family: Arial, sans-serif;
+        font-size: 16px; /* Increased font size */
+        color: #fff;
+        background-color: #007bff;
+        border: none;
+        border-radius: 5px; /* Increased border-radius */
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    .button:hover {
+        background-color: #0056b3;
+    }
+
+    table {
+        margin: 20px auto; /* Adjusted margin */
+        border-collapse: collapse;
+        width: 80%; /* Adjusted width */
+    }
+
+    th, td {
+        padding: 8px;
+        border: 1px solid #ddd;
+        text-align: left;
+    }
+
+    th {
+        background-color: #f2f2f2;
+        color: #333;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<form action="/logs" method="POST">
+
+<select name="username">
+    {% for username in usernames %}
+        <option value="{{username}}">{{ username }}</option>
+    {% endfor %}
+</select>
+
+<button class="button" type="submit">Load Logs</button>
+
+</form>
+
+{% if userLogs %}
+
+<p style="text-align: center;">Displaying logs for {{ fName }} {{ lName }}:</p>
+    <table border="1" style="margin: 0 auto;">
+        <tr>
+            <th>Reponsible Username</th>
+            <th>(optional) Target Username</th>
+            <th>Event Type</th>
+            <th>IP Address</th>
+            <th>Date/Time</th>
+        </tr>
+        {% for log in userLogs %}
+            <tr>
+                <td>{{ log["Username1"] }}</td>
+                <td>{{ log["Username2"] }}</td>
+                <td>{{ log["EventType"] }}</td>
+                <td>{{ log["IPAddress"] }}</td>
+                <td>{{ log["DateTime"] }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+{% endif %}
+
+{% if genericLogs %}
+
+<p style="text-align: center;">Displaying logs for anonymous user:</p>
+    <table border="1" style="margin: 0 auto;">
+        <tr>
+            <th>Event Type</th>
+            <th>IP Address</th>
+            <th>Date/Time</th>
+        </tr>
+        {% for log in genericLogs %}
+            <tr>
+                <td>{{ log["EventType"] }}</td>
+                <td>{{ log["IPAddress"] }}</td>
+                <td>{{ log["DateTime"] }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+{% endif %}
+
+        <!--<p style="text-align: center;">No logs found.</p>-->
+
+{% endblock %}

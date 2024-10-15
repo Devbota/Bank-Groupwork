@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{% endblock %}</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+        h1 {
+            margin: 0;
+        }
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+        nav ul li {
+            display: inline-block;
+            position: relative;
+            padding: 0 10px;
+        }
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+        }
+        nav ul li a:hover {
+            background-color: #444; /* Darken the background color on hover */
+        }
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #333;
+            min-width: 160px;
+            z-index: 1;
+            top: 35px; /* Adjust this value to position the dropdown lower */
+        }
+        .dropdown-content a {
+            color: #fff;
+            padding: 12px 16px;
+            display: block;
+            text-align: left;
+            text-decoration: none;
+        }
+        .dropdown-content a:hover {
+            background-color: #444; /* Darken the background color on hover */
+        }
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+        .dropbtn {
+            color: #fff;
+            padding: 16px;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+            background-color: inherit;
+        }
+        .dropbtn:hover {
+            background-color: #444;
+        }
+        .align-right {
+            float: right;
+        }
+        .content {
+            margin-top: 20px;
+        }
+    </style>
+    {% block css %}{% endblock %}
+</head>
+<body>
+    <header>
+        <h1></h1>
+        <nav>
+            <ul>
+                <li class="dropdown">
+                    <a href="/dashboard" class="dropbtn">Dashboard</a>
+                </li>
+                {% if admin %}
+                <li class="dropdown">
+                    <a href="#" class="dropbtn">Admin</a>
+                    <div class="dropdown-content">
+                        <a href="/manage-users">Manage Users</a>
+                        <a href="/logs">View Log</a>
+                    </div>
+                </li>
+                {% endif %}
+                <li class="dropdown align-right">
+                    <a href="/signout" class="dropbtn">Sign out</a>
+                </li>
+                <!-- Add more categories and pages as needed -->
+            </ul>
+        </nav>
+    </header>
+
+    <div class="content">
+        {% block content %}
+        {% endblock %}
+    </div>
+</body>
+</html>

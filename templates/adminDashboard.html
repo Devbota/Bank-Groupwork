@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block css %}
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+    }
+    .welcome-text {
+        font-size: 24px;
+        margin-bottom: 10px;
+    }
+    table {
+        margin: 20px auto; /* Adjusted margin */
+        border-collapse: collapse;
+        width: 80%; /* Adjusted width */
+    }
+
+    th, td {
+        padding: 8px;
+        border: 1px solid #ddd;
+        text-align: left;
+    }
+
+    th {
+        background-color: #f2f2f2;
+        color: #333;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+    <div class="welcome-text">
+        Welcome, {{ fName }} {{ lName }}
+    </div>
+    {% if logs %}
+
+    <p style="text-align: center;">Displaying recent logs:</p>
+        <table border="1" style="margin: 0 auto;">
+            <tr>
+                <th>Reponsible Username</th>
+                <th>(optional) Target Username</th>
+                <th>Event Type</th>
+                <th>IP Address</th>
+                <th>Date/Time</th>
+            </tr>
+            {% for log in logs %}
+                <tr>
+                    <td>{{ log["Username1"] }}</td>
+                    <td>{{ log["Username2"] }}</td>
+                    <td>{{ log["EventType"] }}</td>
+                    <td>{{ log["IPAddress"] }}</td>
+                    <td>{{ log["DateTime"] }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    {% endif %}
+{% endblock %}

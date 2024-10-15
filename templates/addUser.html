@@ -1,0 +1,98 @@
+{% extends "base.html" %}
+
+{% block title %}Add User{% endblock %}
+
+{% block css %}
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        h1 {
+            text-align: center;
+            margin-top: 20px;
+        }
+        form {
+            max-width: 400px;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        input[type="text"], select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        button[type="submit"] {
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+        button[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+        .error {
+            margin: 50px auto;
+            width: 300px;
+            padding: 20px;
+            border: 2px solid #ccc;
+            border-radius: 10px;
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+    <h1>Add User</h1>
+    {% if error_message %}
+        <div class="error">
+            {% for error in error_message %}
+                <p style="color: red;">{{ error }}</p>
+            {% endfor %}
+        </div>
+    {% endif %}
+    <form action="/add-user" method="POST">
+        <div>
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required>
+        </div>
+        <div>
+            <label for="firstName">First Name:</label>
+            <input type="text" id="firstName" name="fName" required>
+        </div>
+        <div>
+            <label for="lastName">Last Name:</label>
+            <input type="text" id="lastName" name="lName" required>
+        </div>
+        <div>
+            <label for="password">Password:</label>
+            <input type="text" id="password" name="password" required>
+        </div>
+        <div>
+            <label for="role">Role:</label>
+            <select id="role" name="role" required>
+                <option value="admin">Admin</option>
+                <option value="user">User</option>
+            </select>
+        </div>
+        <div>
+            <button type="submit">Add User</button>
+        </div>
+    </form>
+{% endblock %}

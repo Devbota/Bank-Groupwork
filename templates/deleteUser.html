@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block title %}Delete User{% endblock %}
+
+{% block css %}
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+    }
+    .container {
+        margin: 20px auto;
+        width: 60%;
+    }
+    .userDropdown {
+        display: block;
+        margin: 0 auto 20px;
+        width: 100%;
+    }
+    .btn {
+        display: inline-block;
+        padding: 10px 20px;
+        font-size: 16px;
+        text-decoration: none;
+        color: #fff;
+        background-color: #dc3545; /* Red theme */
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+    .btn:hover {
+        background-color: #c82333; /* Darker red on hover */
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1>Delete User</h1>
+    <form action="/delete-user" method="POST">
+        <input name="username" type="text" placeholder="Enter username" required>
+        <button type="submit" class="btn">Delete</button>
+    </form>
+</div>
+{% endblock %}

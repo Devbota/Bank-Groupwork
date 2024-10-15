@@ -1,0 +1,137 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block css %}
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+    }
+    .button {
+        display: inline-block;
+        padding: 5px;
+        border: none;
+        background: none;
+        cursor: pointer;
+    }
+    .welcome-text {
+        font-size: 24px;
+        margin-bottom: 10px;
+    }
+    .balance-text {
+        font-size: 36px;
+        font-weight: bold;
+        margin-bottom: 20px;
+    }
+    .action-buttons {
+        margin-top: 20px;
+    }
+    .action-buttons button {
+        padding: 10px 20px;
+        font-size: 18px;
+        cursor: pointer;
+        border: none;
+        border-radius: 5px;
+        margin: 0 10px;
+    }
+    .deposit-btn {
+        padding: 10px 20px;
+        font-size: 16px;
+        cursor: pointer;
+        border: none;
+        border-radius: 5px;
+        background-color: #28a745;
+        color: #fff;
+        transition: all 0.3s ease-in-out;
+    }
+    .deposit-btn:hover {
+        background-color: #218838;
+    }
+    .withdraw-btn {
+        padding: 10px 20px;
+        font-size: 16px;
+        cursor: pointer;
+        border: none;
+        border-radius: 5px;
+        background-color: #ff4242;
+        color: #fff;
+        transition: all 0.3s ease-in-out;
+    }
+    .withdraw-btn:hover {
+        background-color: #f71a1a;
+    }
+    .input-field {
+        margin-top: 10px;
+    }
+    .input-field input[type="number"] {
+        width: 200px;
+        padding: 10px;
+        font-size: 16px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        text-align: center;
+    }    
+    table {
+        width: 80%;
+        margin: 20px auto;
+        border-collapse: collapse;
+    }
+    th, td {
+        padding: 10px;
+        border: 1px solid #ccc;
+    }
+    th {
+        background-color: #f2f2f2;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+    <script>
+
+        var urlParams = new URLSearchParams(window.location.search);
+        var message = urlParams.get('alert');
+
+        if (message == "Withdraw Error") {
+            alert("You do not have enough money in your account!");
+            window.location.href = "/dashboard";
+        }
+
+    </script>
+    <div class="welcome-text">
+        Welcome, {{ fName }} {{ lName }}
+    </div>
+    <div class="balance-text" id="balance">
+        £{{ balance }}
+    </div>
+    <form action="/dashboard" method="POST">
+        <div class="action-buttons">
+            <button class="deposit-btn" name="button" value="deposit">Deposit</button>
+            <button class="withdraw-btn" name="button" value="withdraw">Withdraw</button>
+        </div>
+        <div class="input-field">
+            <input type="number" name="amount" id="amount" placeholder="Enter amount in £" step="0.01" pattern="\d+(\.\d{1,2})" required>
+        </div>
+    </form>
+    
+    <div>
+        <h2>Transactions</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Transaction Type</th>
+                    <th>Amount</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for transaction in transactions %}
+                <tr>
+                    <td>{{ transaction.Get_Trans_Type() }}</td>
+                    <td>£{{ transaction.Get_Amount() }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

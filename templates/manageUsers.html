@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block title %}User Management{% endblock %}
+
+{% block css %}
+<style>
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+}
+.add-user-btn, .delete-user-btn {
+    display: block;
+    margin: 20px auto; /* Adjusted margin */
+    padding: 10px 20px;
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    text-decoration: none;
+}
+
+.add-user-btn:hover, .delete-user-btn:hover {
+    filter: brightness(90%); /* Reduce brightness on hover */
+}
+
+.add-user-btn {
+    background-color: #28a745; /* Green theme */
+}
+
+.delete-user-btn {
+    background-color: #dc3545; /* Red theme */
+}
+
+</style>
+{% endblock %}
+
+{% block content %}
+<h1>User Management</h1>
+<form action="/delete-user" method="POST">
+    <button type="submit" class="delete-user-btn">Delete User</button>
+</form>
+
+<form action="/add-user" method="POST">
+    <button type="submit" onclick="setLabelValue()" class="add-user-btn">Add User</button>
+</form>
+{% endblock %}
